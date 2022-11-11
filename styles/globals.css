@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    * {
+        box-sizing: border-box;
+    }
+    .btn, button {
+        background-color: #fdfdfd;
+        /* border: none; */
+        color: #08090a;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        text-decoration: none;
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Noto Sans', sans-serif;
+        background-color: #eef0f1;
+        color: #08090a;
+      }
+
+    main {
+        max-height: 90vh;
+    }
+
+    Link {
+        cursor: pointer;
+    }
+}
