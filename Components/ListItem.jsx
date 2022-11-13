@@ -19,16 +19,14 @@ const ListItem = ({ post, selected, refProp }) => {
             {post.title}
           </p>
         </header>
-
-        <span className='inline-block bg-lime-50 rounded-full ml-auto px-3 py-1 text-md text-slate-900 mb-1'>
-          💵: {post.price}
-        </span>
-        <span className='inline-block bg-gray-200 rounded-full ml-auto p-2 text-sm font-semibold text-gray-700'>
-          📞: {post.phone}
-        </span>
-        <p className='my-2 p-2 max-h-20 overflow-auto bg-white text-slate-900 text-base'>
+        <div className='flex'>
+          <span className=' inline-block bg-lime-50 rounded-full ml-auto px-3 py-1 text-md text-slate-900 mb-1'>
+            💸: {post.price}
+          </span>
+        </div>
+        {/* <p className='my-2 p-2 max-h-20 overflow-auto bg-white text-slate-900 text-base'>
           {post.content}
-        </p>
+        </p> */}
         <p className='flex my-2 p-2 bg-gray-300 rounded-lg'>
           <img
             src='/img/location-marker.svg'
@@ -40,12 +38,18 @@ const ListItem = ({ post, selected, refProp }) => {
           {/* <b className='text-md'>Address: </b>
           {`${post.address.streetAddress} ${post.address.district} ${post.address.locality} ${post.address.province} ${post.address.country} ${post.address.zipCode}`} */}
         </p>
-
-        <Link href={`/${post.username}`} class='flex items-center mt-2'>
-          <p className='text-sm font-bold text-gray-900 leading-none'>
-            By @ {post.username}
-          </p>
-        </Link>
+        <div className='flex'>
+          <Link href={`/${post.username}`} className='flex items-center mt-2'>
+            <p className=' flex text-sm font-bold text-gray-900 leading-none'>
+              <button className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded'>
+                @ {post.username}
+              </button>
+            </p>
+          </Link>
+          <span className='inline-block bg-gray-200 rounded-full ml-auto p-2 text-sm font-semibold text-gray-700'>
+            📞: {post.phone}
+          </span>
+        </div>
       </div>
       <footer className='mt-auto px-2 pb-2 flex'>
         {/* <Link

@@ -17,7 +17,9 @@ export default function Intro() {
       <div className='mt-48 mb-auto ml-32'>
         <div className='m-5'>
           <h1 className='text-8xl font-bold'>Field</h1>
-          <span className='text-4xl'>Visualize Map & Market place.</span>
+          <span className='text-4xl font-semibold'>
+            Visualize Map & Marketplace.
+          </span>
         </div>
         <SignInButton />
         {/* <button className='mb-5'>h1</button>

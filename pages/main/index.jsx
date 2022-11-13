@@ -18,34 +18,6 @@ import {
   getFirestore,
 } from "firebase/firestore"
 
-// export async function getServerSideProps({}) {
-//   const provinceDocs = await getPostsWithProvince(province)
-
-//   // If no user, short circuit to 404 page
-//   if (!provinceDocs) {
-//     return { notFound: true }
-//   }
-
-//   // JSON serializable data
-//   // let user = null
-//   let posts = null
-
-//   if (provinceDocs) {
-//     province = provinceDocs.data()
-
-//     const postQuery = query(
-//       collection(getFirestore(), province.ref.path, "posts"),
-//       where("published", "==", true),
-//       orderBy("createdAt", "desc"),
-//       limit(10)
-//     )
-//     posts = (await getDocs(postQuery)).docs.map(postToJSON)
-//   }
-//   return {
-//     props: { posts }, // will be passed to the page component as props
-//   }
-// }
-
 const Home = ({ posts }) => {
   // TODO: fetch places instead of actual hard code
   // const places = [
@@ -141,8 +113,19 @@ const Home = ({ posts }) => {
   //   },
   // ]
   const [coordinates, setCoordinates] = useState({})
-  const [bounds, setBounds] = useState(null)
+  const [zoomLv, setZoomLv] = useState(11)
+  // const [bounds, setBounds] = useState(null)
+  const [drawingMap, setDrawingMap] = useState(false)
   const [childClicked, setChildClicked] = useState(null)
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        setCoordinates({ lat: latitude, lng: longitude })
+      }
+    )
+    setZoomLv(11)
+  }, [])
 
   // Load google map script
   const { isLoaded } = useLoadScript({
@@ -151,24 +134,33 @@ const Home = ({ posts }) => {
   })
 
   if (!isLoaded) return <div>Loading . . . </div>
-  console.log("posts", posts)
+  console.log("Mainposts", posts)
   return (
     <>
-      <Navbar setCoordinates={setCoordinates} />
+      <Navbar
+        setCoordinates={setCoordinates}
+        drawingMap={drawingMap}
+        setDrawingMap={setDrawingMap}
+      />
       <main className='h-[90vh] flex'>
         <div className='w-[40%]'>
           <List
-            // places={places} childClicked={childClicked}
+            // posts={posts}
+            childClicked={childClicked}
             setCoordinates={setCoordinates}
+            drawingMap={drawingMap}
           />
         </div>
         <div className='w-[60%]'>
           <Map
-            // places={places}
+            // posts={posts}
             coordinates={coordinates}
             setCoordinates={setCoordinates}
-            setBounds={setBounds}
-            // setChildClicked={setChildClicked}
+            zoomLv={zoomLv}
+            setZoomLv={setZoomLv}
+            // setBounds={setBounds}
+            drawingMap={drawingMap}
+            setChildClicked={setChildClicked}
           />
         </div>
       </main>

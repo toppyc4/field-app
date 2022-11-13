@@ -21,7 +21,7 @@ import PostForm from "../../Components/PostForm"
 export default function AdminPostPage() {
   return (
     <AuthCheck>
-      <nav className='max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
+      <nav className='sticky top-0 z-10 max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
         <Link href='/main'>
           <h1 className='text-[66px] font-bold text-white justify-self-start cursor-pointer '>
             Field
@@ -61,17 +61,12 @@ function PostManager() {
               postRef={postRef}
               defaultValues={post}
               preview={preview}
+              setPreview={setPreview}
             />
           </section>
 
           <aside className='flex flex-col w-[20%] min-w-[250px] min-h-[200px] text-center sticky'>
-            <h3 className='text-xl font-semibold mb-3 '>Tools</h3>
-            <button
-              onClick={() => setPreview(!preview)}
-              className='min-w-40 max-w-44 mb-3 mx-auto'
-            >
-              {preview ? "Edit" : "Preview"}
-            </button>
+            {/* <h3 className='text-xl font-semibold mb-3 '>Tools</h3> */}
             <Link href={`/${post.username}/${post.slug}`}>
               <button className='min-w-40 max-w-44 mx-auto bg-sky-900 text-white'>
                 Live view

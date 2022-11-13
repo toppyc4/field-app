@@ -20,8 +20,15 @@ import {
 } from "@reach/combobox"
 import "@reach/combobox/styles.css"
 
-export default function List({ setCoordinates, childClicked, posts }) {
+export default function List({
+  setCoordinates,
+  childClicked,
+  posts,
+  province,
+  type,
+}) {
   const router = useRouter()
+  // const { query } = useRouter()
   const [elRefs, setElRefs] = useState([])
 
   const {
@@ -32,25 +39,53 @@ export default function List({ setCoordinates, childClicked, posts }) {
     clearSuggestions,
   } = usePlacesAutocomplete()
 
-  const handleSelect = async (val) => {
-    setValue(val, false)
-    clearSuggestions()
+  console.log("province", province)
+  console.log("type", type)
+  // console.log("router", router.query)
+  // console.log("router.asPath", router.asPath)
+  // console.log("router.asPath lenght", router.asPath.length)
 
-    const results = await getGeocode({ address: val })
-    const { lat, lng } = await getLatLng(results[0])
-    setCoordinates({ lat, lng })
-    router.push(`/main/${val}`)
+  function provinceTitle() {
+    if (router.asPath.length > 5) {
+      return decodeURIComponent(router.asPath.slice(6))
+    } else if (router.asPath.length == 5) {
+      return "Main"
+    }
+    // if (router.query.length !== 0) {
+    //   return router.query.province
+    // } else if (router.query === 0) {
+    //   return <p>Main</p>
+    // }
   }
-  const handleChoose = async (e) => {
+
+  // const handleSelect = async (val) => {
+  //   setValue(val, false)
+  //   clearSuggestions()
+
+  //   const results = await getGeocode({ address: val })
+  //   const { lat, lng } = await getLatLng(results[0])
+  //   setCoordinates({ lat, lng })
+  //   router.push(`/main/${val}`)
+  // }
+  const handleProvinceSelect = async (e) => {
     e.preventDefault()
-    const province = await e.target.value
-    setValue(province, false)
+    const _province = await e.target.value
+    // setValue(province, false)
     // alert(province)
 
-    const results = await getGeocode({ address: province })
+    const results = await getGeocode({ address: _province })
     const { lat, lng } = await getLatLng(results[0])
     setCoordinates({ lat, lng })
-    router.push(`/main/${province}`)
+    router.push(`/main/${_province}`)
+  }
+
+  const handleTypeSelect = async (e) => {
+    // e.preventDefault()
+    const _type = await e.target.value
+    // setValue(province, false)
+    // alert(province)
+
+    router.push(`/main/${province.province}/${_type}`)
   }
 
   useEffect(() => {
@@ -62,11 +97,13 @@ export default function List({ setCoordinates, childClicked, posts }) {
   }, [posts])
 
   return (
-    <div className='pt-4 px-4'>
+    <div className='h-[92vh] pt-4 px-4 bg-slate-100'>
       <div className=''>
         <div className='flex'>
           <h1 className='text-3xl font-bold'>
-            {posts && posts.length != 0 ? posts[0].address.province : "Area"}
+            {/* {posts && posts.length != 0 ? posts[0].address.province : "Area"} */}
+            {/* provinceTitle() */}
+            {province ? province?.province + " / " + type : "Main"}
           </h1>
           <span className='my-auto ml-auto mr-4'>
             - - - {posts?.length || 0} result(s) founded{" "}
@@ -77,150 +114,14 @@ export default function List({ setCoordinates, childClicked, posts }) {
         <div className='grid grid-cols-2 gap-1'>
           <div className='inline-block relative w-64'>
             <label className='font-medium'> province: </label>
-            {/* <Combobox onSelect={handleSelect}>
-              <ComboboxInput
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                disabled={!ready}
-                className='appearance-none block w-full bg-white text-gray-700  border-gray-400  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-                placeholder='Search Province'
-              />
-              <ComboboxPopover>
-                <ComboboxList className='max-h-44 overflow-auto'>
-                  
-                {status === "OK" &&
-                    data.map(({ place_id, description }) => (
-                      <ComboboxOption key={place_id} value={description} />
-                    ))} 
-                    
-                  <ComboboxOption value='Nong Bua Lamphu'>
-                    Nong Bua Lamphu ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Samut Prakan'>
-                    Samut Prakan ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Suphan Buri'>
-                    Suphan Buri(สุพรรณบุรี)
-                  </ComboboxOption>
-                  <ComboboxOption value='Amnat Charoen'>
-                    Amnat Charoen ()
-                  </ComboboxOption>
 
-                  <ComboboxOption value='Ang Thong'>
-                    Ang Thong ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Bangkok'>
-                    Bangkok (กรุงเทพฯ)
-                  </ComboboxOption>
-                  <ComboboxOption value='Buri Rum'>Buri Rum ()</ComboboxOption>
-                  <ComboboxOption value='Bueng Kan'>
-                    Bueng Kan ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Chachoengsao'>
-                    Chachoengsao ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Chaiyaphum'>
-                    Chaiyaphum ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Chanthaburi'>
-                    Chanthaburi ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Chiang Mai'>
-                    Chiang Mai ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Chiang Rai'>
-                    Chiang Rai ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Chonburi'>Chonburi ()</ComboboxOption>
-                  <ComboboxOption value='Kalasin'>Kalasin ()</ComboboxOption>
-                  <ComboboxOption value='Kamphaeng Phet'>
-                    Kamphaeng Phet ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Khon Kaen'>
-                    Khon Kaen ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Loei'>Loei ()</ComboboxOption>
-                  <ComboboxOption value='Lumpang'>Lumpang ()</ComboboxOption>
-                  <ComboboxOption value='Lumphun'>Lumphun ()</ComboboxOption>
-                  <ComboboxOption value='Mae Hong Son'>
-                    Mae Hong Son ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Maha Sarakham'>
-                    Maha Sarakham ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Nakhon Nayok'>
-                    Nakhon Nayok ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Mukdahan'>Mukdahan ()</ComboboxOption>
-                  <ComboboxOption value='Nakhon Phanom'>
-                    Nakhon Phanom ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Nakhon Ratchasima'>
-                    Nakhon Ratchasima ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Nakhon Sawan'>
-                    Nakhon Sawan ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Nan'>Nan ()</ComboboxOption>
-                  <ComboboxOption value='Nong Khai'>Nong Khai()</ComboboxOption>
-                  <ComboboxOption value='Pathum Thani'>
-                    Pathum Thani ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Nong Bua Lumphu'>
-                    Nong Bua Lumphu ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Phayao'>Phayao ()</ComboboxOption>
-                  <ComboboxOption value='Phetchabun'>
-                    Phetchabun ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Phichit'>Phichit ()</ComboboxOption>
-                  <ComboboxOption value='Phitsanulok'>
-                    Phitsanulok ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Phra Nakhon Si Ayutthaya'>
-                    Phra Nakhon Si Ayutthaya ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Phrae'>Phrae ()</ComboboxOption>
-                  <ComboboxOption value='Rayong'>Rayong ()</ComboboxOption>
-                  <ComboboxOption value='Roi Et'>Roi Et ()</ComboboxOption>
-                  <ComboboxOption value='SaKaeo'>SaKaeo ()</ComboboxOption>
-
-                  <ComboboxOption value='Sakhon Nakhon'>
-                    Sakhon Nakhon()
-                  </ComboboxOption>
-                  <ComboboxOption value='Sara Buri'>
-                    Sara Buri ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Sing Buri'>
-                    Sing Buri ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Sisaket'>Sisaket ()</ComboboxOption>
-                  <ComboboxOption value='Sukhothai'>
-                    Sukhothai ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Surin'>Surin ()</ComboboxOption>
-                  <ComboboxOption value='Tak'>Tak ()</ComboboxOption>
-                  <ComboboxOption value='Trat'>Trat ()</ComboboxOption>
-
-                  <ComboboxOption value='Ubon Ratchath'>
-                    Ubon Ratchath ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Udon Thani'>
-                    Udon Thani ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Uthai Thani'>
-                    Uthai Thani ()
-                  </ComboboxOption>
-                  <ComboboxOption value='Uttaradit'>
-                    Uttaradit ()
-                  </ComboboxOption>
-                </ComboboxList>
-              </ComboboxPopover>
-            </Combobox>  */}
             <select
-              onChange={handleChoose}
-              className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight cursor-pointer focus:outline-none focus:shadow-outline '
+              onChange={handleProvinceSelect}
+              className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight cursor-pointer focus:outline-none focus:shadow-outline'
             >
+              <option value='none' selected disabled hidden>
+                Province (จังหวัด)
+              </option>
               <option value='Amnat Charoen'>Amnat Charoen (อำนาจเจริญ)</option>
               <option value='Ang Thong'>Ang Thong (อ่างทอง)</option>
               <option value='Bangkok'>Bangkok (กรุงเทพฯ)</option>
@@ -314,11 +215,21 @@ export default function List({ setCoordinates, childClicked, posts }) {
           </div>
           <div className='inline-block relative w-64'>
             <label className='font-medium'> type of service: </label>
-            <select className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight cursor-pointer focus:outline-none focus:shadow-outline '>
-              <option>Vacant Land (ที่ดินเปล่า)</option>
-              <option>Real Estate (บ้าน)</option>
-              <option>Property (สิ่งปลูกสร้างพร้อมที่ดิน)</option>
-              <option>Service (บริการ)</option>
+            <select
+              onChange={handleTypeSelect}
+              className='block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight cursor-pointer focus:outline-none focus:shadow-outline '
+              disabled={!province && posts?.length == 0}
+            >
+              <option value='none' selected disabled hidden>
+                type (ประเภท)
+              </option>
+              <option value='all'>All (ทั้งหมด)</option>
+              <option value='Vacant Land'>Vacant Land (ที่ดินเปล่า)</option>
+              <option value='Real Estate'>Real Estate (บ้าน)</option>
+              <option value='Property'>
+                Property (สิ่งปลูกสร้างพร้อมที่ดิน)
+              </option>
+              <option value='Service'>Service (บริการ)</option>
             </select>
             <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center pt-6 px-2 text-gray-700'>
               <svg

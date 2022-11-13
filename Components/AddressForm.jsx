@@ -107,7 +107,7 @@ export default function AddressForm() {
             >
               <option value='Amnat Charoen'>Amnat Charoen(อำนาจเจริญ)</option>
               <option value='Ang Thong'>Ang Thong (อ่างทอง)</option>
-              <option value='Bangkok' selected='selected'>
+              <option value='Bangkok' selected>
                 Bangkok (กรุงเทพฯ)
               </option>
               <option value='Buri Rum'>Buri Rum (บุรีรัมย์)</option>

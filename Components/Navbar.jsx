@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { UserContext } from "../lib/context"
 import { SignOutButton } from "../pages/LoginForm"
 
@@ -21,8 +21,9 @@ import { useRouter } from "next/router"
 
 // import { Autocomplete } from "@react-google-maps/api"
 
-const Navbar = ({ setCoordinates }) => {
+const Navbar = ({ setCoordinates, drawingMap, setDrawingMap }) => {
   const { user, username } = useContext(UserContext)
+  // const [drawingMap, setDrawingMap] = useState(false)
   // const [autocomplete, setAutocomplete] = useState(null)
 
   // const onLoad = (autoC) => setAutocomplete(autoC)
@@ -32,6 +33,7 @@ const Navbar = ({ setCoordinates }) => {
 
   //   setCoordinates({ lat, lng })
   // }
+  // console.log("drawingMap", drawingMap)
 
   const {
     ready,
@@ -51,6 +53,18 @@ const Navbar = ({ setCoordinates }) => {
         className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-solid border-b-4 border-blue-700 hover:border-blue-500 rounded'
       >
         Create Post
+      </button>
+    )
+  }
+  const DrawMapButton = () => {
+    return (
+      <button
+        onClick={() => {
+          setDrawingMap((prev) => !prev)
+        }}
+        className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-solid border-b-4 border-blue-700 hover:border-blue-500 rounded'
+      >
+        {drawingMap ? "view Visualize Map" : "Draw Map"}
       </button>
     )
   }
@@ -77,7 +91,7 @@ const Navbar = ({ setCoordinates }) => {
         <div className='flex content-center'>
           <Link
             href={`/${username}`}
-            className='flex bg-lime-500 hover:bg-lime-400 text-white my-auto mr-3 p-1 max-h-[50px] border-solid border-b-4 border-lime-600 hover:border-lime-400 rounded overflow-hidden'
+            className='flex bg-lime-500 hover:bg-lime-400 text-white my-auto mr-3 p-1 max-h-[50px] border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded overflow-hidden'
           >
             <img
               src={user?.photoURL || "/img/question-mark-profile.jpg"}
@@ -89,6 +103,9 @@ const Navbar = ({ setCoordinates }) => {
           </Link>
           <div className='mr-3'>
             <CreatePostButton />
+          </div>
+          <div className='mr-3'>
+            <DrawMapButton />
           </div>
           <div>
             <SignOutButton />

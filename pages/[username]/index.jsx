@@ -75,7 +75,7 @@ export default function UserProfilePage({ user, posts }) {
 
   return (
     <>
-      <nav className='max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
+      <nav className='sticky top-0 max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
         <Link href='/main'>
           <h1 className='text-[66px] font-bold text-white justify-self-start cursor-pointer '>
             Field
@@ -86,7 +86,7 @@ export default function UserProfilePage({ user, posts }) {
             className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-solid border-b-4 border-blue-700 hover:border-blue-500 rounded ml-auto'
             onClick={handleSetEdit}
           >
-            Update Profile
+            {editing ? "Hide Form" : "Update Profile"}
           </button>
         )}
       </nav>

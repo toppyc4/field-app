@@ -1,10 +1,5 @@
 import { useMemo, useCallback, useRef, useState } from "react"
-import {
-  GoogleMap,
-  MarkerF,
-  MarkerClustererF,
-  DrawingManager,
-} from "@react-google-maps/api"
+import { GoogleMap, DrawingManager } from "@react-google-maps/api"
 
 const DrawingMap = ({ coordinates }) => {
   const [text, setText] = useState("")
@@ -24,7 +19,7 @@ const DrawingMap = ({ coordinates }) => {
   const mapRef = useRef()
   const onLoad = useCallback((map) => (mapRef.current = map), [])
   const options = useMemo(() => ({
-    mapId: "",
+    mapId: "1dc8eb85a559cb2e",
     // disableDefaultUI: true,
     clickableIcons: false,
   }))
@@ -33,7 +28,7 @@ const DrawingMap = ({ coordinates }) => {
     <GoogleMap
       zoom={11}
       center={coordinates}
-      mapContainerClassName='w-full h-full'
+      mapContainerClassName='w-full h-[92vh]'
       options={options}
       onLoad={onLoad}
     >

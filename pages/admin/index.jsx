@@ -24,7 +24,7 @@ import Navbar from "../../components/Navbar"
 export default function AdminPostPage() {
   return (
     <AuthCheck>
-      <nav className='max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
+      <nav className='sticky top-0 z-10 max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
         <Link href='/main'>
           <h1 className='text-[66px] font-bold text-white justify-self-start cursor-pointer '>
             Field
@@ -176,7 +176,7 @@ function CreateNewPost() {
     await batch
       .commit()
       .then(() => {
-        toast.success("batch!, Nice name!")
+        // toast.success("batch!, Nice name!")
         // router.push("/main")
       })
       .catch((err) => alert("Commit Batch Error:" + err))
@@ -216,11 +216,11 @@ function CreateNewPost() {
         <input
           // value={title}
           // onChange={(e) => setTitle(e.target.value)}
-          placeholder='My Awesome Article!'
+          placeholder='garden in Chiang Mai'
           className='appearance-none block w-full bg-gray-200 text-2xl text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           {...register("title", {
             maxLength: { value: 33, message: "content is too long" },
-            minLength: { value: 4, message: "content is too short" },
+            minLength: { value: 5, message: "content is too short" },
             required: { value: true, message: "content is required" },
           })}
         />
@@ -294,7 +294,7 @@ function CreateNewPost() {
                   className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                   id='district'
                   type='text'
-                  placeholder='Khu Khot'
+                  placeholder='Huay Sai'
                   {...register("district", {
                     maxLength: { value: 30, message: "content is too long" },
                     minLength: { value: 3, message: "content is too short" },
@@ -316,7 +316,7 @@ function CreateNewPost() {
                   className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                   id='locality'
                   type='text'
-                  placeholder='Albuquerque'
+                  placeholder='Maerim'
                   {...register("locality", {
                     maxLength: { value: 30, message: "content is too long" },
                     minLength: { value: 3, message: "content is too short" },
@@ -345,9 +345,7 @@ function CreateNewPost() {
                       Amnat Charoen(อำนาจเจริญ)
                     </option>
                     <option value='Ang Thong'>Ang Thong (อ่างทอง)</option>
-                    <option value='Bangkok' selected='selected'>
-                      Bangkok (กรุงเทพฯ)
-                    </option>
+                    <option value='Bangkok'>Bangkok (กรุงเทพฯ)</option>
                     <option value='Buri Rum'>Buri Rum (บุรีรัมย์)</option>
                     <option value='Bueng Kan'>Bueng Kan (บึงกาฬ)</option>
                     <option value='Chachoengsao'>
@@ -355,7 +353,9 @@ function CreateNewPost() {
                     </option>
                     <option value='Chaiyaphum'>Chaiyaphum (ชัยภูมิ)</option>
                     <option value='Chanthaburi'>Chanthaburi (จันทบุรี)</option>
-                    <option value='Chiang Mai'>Chiang Mai (เชียงใหม่)</option>
+                    <option value='Chiang Mai' selected>
+                      Chiang Mai (เชียงใหม่)
+                    </option>
                     <option value='Chiang Rai'>Chiang Rai (เชียงราย)</option>
                     <option value='Chonburi'>Chonburi (ชลบุรี)</option>
                     <option value='Chumphon'>Chumphon (ชุมพร)</option>
@@ -363,7 +363,7 @@ function CreateNewPost() {
                     <option value='Kamphaeng Phet'>
                       Kamphaeng Phet (กำแพงเพชร)
                     </option>
-                    <option value='Kanchanaburi '>
+                    <option value='Kanchanaburi'>
                       Kanchanaburi (กาญจนบุรี)
                     </option>
                     <option value='Khon Kaen'>Khon Kaen (ขอนแก่น)</option>
@@ -485,7 +485,7 @@ function CreateNewPost() {
                   className='appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
                   id='grid-zip'
                   type='text'
-                  placeholder='90210'
+                  placeholder='50180'
                   {...register("zipCode", {
                     required: { value: false },
                   })}
@@ -552,10 +552,14 @@ function CreateNewPost() {
                     required: { value: true, message: "content is required" },
                   })}
                 >
-                  <option selected='selected'>Vacant Land (ที่ดินเปล่า)</option>
-                  <option>Real Estate (บ้าน)</option>
-                  <option>Property (สิ่งปลูกสร้างพร้อมที่ดิน)</option>
-                  <option>Service (บริการ)</option>
+                  <option value='Vacant Land' selected>
+                    Vacant Land (ที่ดินเปล่า)
+                  </option>
+                  <option value='Real Estate'>Real Estate (บ้าน)</option>
+                  <option value='Property'>
+                    Property (สิ่งปลูกสร้างพร้อมที่ดิน)
+                  </option>
+                  <option value='Service'>Service (บริการ)</option>
                 </select>
                 {errors.typeOfService && (
                   <p className='font-bold text-red-600'>
@@ -608,7 +612,7 @@ function CreateNewPost() {
                 type='text'
                 placeholder='307-123-7898'
                 {...register("phone", {
-                  maxLength: { value: 21, message: "content is too long" },
+                  maxLength: { value: 14, message: "content is too long" },
                   minLength: { value: 8, message: "content is too short" },
                   required: { value: true, message: "content is required" },
                 })}
@@ -660,7 +664,7 @@ function CreateNewPost() {
         <button
           type='submit'
           // disabled={}
-          className='mt-3 bg-slate-800 text-white hover:bg-slate-600'
+          className='w-full mt-3 bg-slate-800 text-white hover:bg-slate-600'
         >
           Create New Post
         </button>

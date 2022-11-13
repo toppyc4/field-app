@@ -16,8 +16,15 @@ import { db } from "../lib/firebaseConfig"
 import { useForm } from "react-hook-form"
 import ReactMarkdown from "react-markdown"
 import toast from "react-hot-toast"
+import { useRouter } from "next/router"
 
-export default function PostForm({ defaultValues, postRef, post, preview }) {
+export default function PostForm({
+  defaultValues,
+  postRef,
+  post,
+  preview,
+  setPreview,
+}) {
   const {
     register,
     handleSubmit,
@@ -44,6 +51,8 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
     mode: "onChange",
   })
 
+  const router = useRouter()
+
   const _streetAddress1 = watch("streetAddress1")
   const _streetAddress2 = watch("streetAddress2")
   const _district = watch("district")
@@ -60,6 +69,12 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
   )
   const [address, setAddress] = useState({})
   const [downloadURL, setDownloadURL] = useState(null)
+
+  useEffect(() => {
+    if (defaultValues.photoUrl !== null) {
+      setDownloadURL(defaultValues.photoUrl)
+    }
+  }, [])
 
   useEffect(() => {
     setAddress({
@@ -89,6 +104,50 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
   ])
 
   const { isDirty } = formState
+
+  function toastAlert() {
+    // toast.custom((t) => (
+    //   <div className='w-[40vh]'>
+    //     <div className='bg-red-500 text-white font-bold rounded-t px-4 py-2'>
+    //       Are you sure?
+    //     </div>
+    //     <div className='flex border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700'>
+    //       <p>This cannot be undo</p>
+    //       <button
+    //         type='submit'
+    //         className='ml-auto mr-4 p-1'
+    //         onClick={deletePost}
+    //       >
+    //         Yes
+    //       </button>
+    //       <button
+    //         type='button'
+    //         className=' mx-2 p-1'
+    //         onClick={() => toast.dismiss(t.id)}
+    //       >
+    //         No
+    //       </button>
+    //     </div>
+    //   </div>
+    // ))
+    toast((t) => (
+      <div className='bg- w-[30vh] flex justify-center align-center content-center'>
+        <h1 className='font-bold text-lg my-auto'>Are you sure?</h1>
+        <button
+          className='ml-auto p-1 text-md font-medium'
+          onClick={deletePost}
+        >
+          Yes
+        </button>
+        <button
+          className='m-3 p-1 text-md font-medium'
+          onClick={() => toast.dismiss(t.id)}
+        >
+          No
+        </button>
+      </div>
+    ))
+  }
 
   const updatePost = async ({
     phone,
@@ -160,23 +219,43 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
     await batch
       .commit()
       .then(() => {
-        toast.success("batch!, updated")
+        // toast.success("batch!, updated")
         // router.push("/main")
       })
       .catch((err) => alert("Commit Batch Error:" + err))
 
     reset({ content, published })
     toast.success("Post updated successfully!")
+    router.push(`/${post.username}`)
+  }
+
+  const deletePost = async () => {
+    const batch = writeBatch(getFirestore())
+    const _province = post?.address?.province
+    const _title = post?.title
+
+    // ref to post in provinces
+    const provincePostRef = doc(
+      getFirestore(),
+      "provinces",
+      _province,
+      "posts",
+      _title
+    )
+
+    batch.delete(postRef)
+    batch.delete(provincePostRef)
+
+    await batch.commit().then(() => {
+      alert("Successfully delete post!")
+      toast.dismiss()
+      router.push(`/${post.username}`)
+    })
   }
 
   return (
     <form onSubmit={handleSubmit(updatePost)} className='w-full max-w-2xl mb-8'>
-      {preview && (
-        <div className='p-[2rem] bg-white border-solid border-gray-500 rounded-md'>
-          <ReactMarkdown>{watch("content")}</ReactMarkdown>
-        </div>
-      )}
-      <div className={preview ? "hidden" : "flex flex-col"}>
+      <div className='flex flex-col'>
         <div className=''>
           <div>
             <h1 className='text-xl mb-5 underline'>
@@ -291,7 +370,7 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
                       Amnat Charoen(อำนาจเจริญ)
                     </option>
                     <option value='Ang Thong'>Ang Thong (อ่างทอง)</option>
-                    <option value='Bangkok' selected='selected'>
+                    <option value='Bangkok' selected>
                       Bangkok (กรุงเทพฯ)
                     </option>
                     <option value='Buri Rum'>Buri Rum (บุรีรัมย์)</option>
@@ -402,7 +481,7 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
                     <option value='Uthai Thani'>Uthai Thani (อุทัยธานี)</option>
                     <option value='Uttaradit'>Uttaradit (อุตรดิตถ์)</option>
                     <option value='Yala'>Yala (ยะลา)</option>
-                    <option selected='selected'>Bangkok</option>
+                    <option selected>Bangkok</option>
                   </select>
                   <div className='pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700'>
                     <svg
@@ -499,10 +578,14 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
                     required: { value: true, message: "content is required" },
                   })}
                 >
-                  <option selected='selected'>Vacant Land (ที่ดินเปล่า)</option>
-                  <option>Real Estate (บ้าน)</option>
-                  <option>Property (สิ่งปลูกสร้างพร้อมที่ดิน)</option>
-                  <option>Service (บริการ)</option>
+                  <option value='Vacant Land' selected>
+                    Vacant Land (ที่ดินเปล่า)
+                  </option>
+                  <option value='Real Estate'>Real Estate (บ้าน)</option>
+                  <option value='Property'>
+                    Property (สิ่งปลูกสร้างพร้อมที่ดิน)
+                  </option>
+                  <option value='Service'>Service (บริการ)</option>
                 </select>
                 {errors.typeOfService && (
                   <p className='font-bold text-red-600'>
@@ -555,7 +638,7 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
                 type='text'
                 placeholder='307-123-7898'
                 {...register("phone", {
-                  maxLength: { value: 21, message: "content is too long" },
+                  maxLength: { value: 14, message: "content is too long" },
                   minLength: { value: 8, message: "content is too short" },
                   required: { value: true, message: "content is required" },
                 })}
@@ -580,25 +663,38 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
             <label className='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>
               Info (ข้อมูล)
             </label>
+            {preview && (
+              <div className='p-[2rem] bg-white border-solid border-gray-500 rounded-md'>
+                <ReactMarkdown>{watch("content")}</ReactMarkdown>
+              </div>
+            )}
             <textarea
               {...register("content", {
                 maxLength: { value: 20000, message: "content is too long" },
                 minLength: { value: 10, message: "content is too short" },
                 required: { value: true, message: "content is required" },
               })}
-              className='h-[15vh] w-full p-[0.5rem]'
+              className={preview ? "hidden" : "h-[15vh] w-full p-[0.5rem]"}
             ></textarea>
-            <i>
-              <a
-                target='_blank'
-                href='https://www.markdownguide.org/cheat-sheet/'
-                className='text-blue-600 underline'
+            <div className='flex'>
+              <i>
+                <a
+                  target='_blank'
+                  href='https://www.markdownguide.org/cheat-sheet/'
+                  className='text-blue-600 underline'
+                >
+                  learn more
+                </a>
+                about how to use Markdown
+              </i>
+              <button
+                type='button'
+                onClick={() => setPreview(!preview)}
+                className='min-w-40 max-w-44 p-0 ml-auto mr-2'
               >
-                learn more
-              </a>{" "}
-              about how to use Markdown
-            </i>
-
+                {preview ? "Edit" : "Preview"}
+              </button>
+            </div>
             {errors.content && (
               <p className='font-bold text-red-600'>{errors.content.message}</p>
             )}
@@ -616,10 +712,38 @@ export default function PostForm({ defaultValues, postRef, post, preview }) {
 
         <button
           type='submit'
-          className='bg-green-600 enabled:hover:bg-green-500 disabled:opacity-75'
+          className='bg-green-800 enabled:hover:bg-green-600 disabled:opacity-75'
           disabled={!isDirty}
         >
           Save Change
+        </button>
+
+        {/* <div className='mt-4'>
+          <div className='bg-red-500 text-white font-bold rounded-t px-4 py-2'>
+            Are you sure?
+          </div>
+          <div className='flex border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700'>
+            <p>This cannot be undo</p>
+            <button
+              type='button'
+              className='ml-auto mr-4 p-1'
+              onClick={deletePost}
+            >
+              Yes
+            </button>
+            <button type='button' className=' mx-2 p-1' onClick={() => {}}>
+              No
+            </button>
+          </div>
+        </div> */}
+
+        <button
+          type='button'
+          className='my-4 bg-red-800 enabled:hover:bg-red-600 disabled:opacity-75'
+          // disabled={true}
+          onClick={toastAlert}
+        >
+          Delete Post
         </button>
       </div>
     </form>

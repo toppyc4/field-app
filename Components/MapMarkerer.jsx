@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
+import { useRef, useEffect, useState, useMemo, useCallback } from "react"
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete"
-import { useLoadScript } from "@react-google-maps/api"
+import { useLoadScript, GoogleMap, MarkerF } from "@react-google-maps/api"
 import GoogleMapReact from "google-map-react"
 
 export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {
@@ -14,6 +14,21 @@ export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {
   })
 
   // const [showMap, setShowMap] = useState(false)
+  // const mapRef = useRef()
+  // const options = useMemo(
+  //   () => ({
+  //     mapId: "1dc8eb85a559cb2e",
+  //     // disableDefaultUI: true,
+  //     // clickableIcons: false,
+  //   }),
+  //   []
+  // )
+
+  // const onLoad = useCallback(
+  //   // setMap,
+  //   (map) => (mapRef.current = map),
+  //   []
+  // )
 
   function handleClick() {
     getGeocode({ address: address.address })
@@ -59,6 +74,23 @@ export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {
         <b className='bg-lime-200 px-4 py-2'>
           lat: {miniMapCoor?.lat}, lng: {miniMapCoor?.lng}
         </b>
+        {/* <GoogleMap
+          zoom={12}
+          center={miniMapCoor}
+          mapContainerClassName='w-full h-full'
+          options={options}
+          onLoad={onLoad}
+          onCenterChanged={(e) => {
+            console.log("e", e)
+            setMiniMapCoor({ lat: e.center.lat, lng: e.center.lng })
+          }}
+        >
+          <MarkerF
+            position={miniMapCoor}
+            icon={"/img/map-pin-black.svg"}
+            className='abosolute z-1'
+          />
+        </GoogleMap> */}
         <GoogleMapReact
           // bootstrapURLKeys={{
           //   key: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g",
@@ -68,6 +100,7 @@ export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {
           defaultZoom={15}
           options={""}
           onChange={(e) => {
+            console.log("e", e)
             setMiniMapCoor({ lat: e.center.lat, lng: e.center.lng })
           }}
         >

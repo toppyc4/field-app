@@ -135,8 +135,8 @@ export default function UserForm({ user, setEditing }) {
   }
 
   return (
-    <div className='mt-4 pb-10'>
-      <h1 className='my-4 mx-2 font-bold text-2xl underline'>User's Form</h1>
+    <div className='flex flex-col mt-4 pb-10'>
+      <h1 className='my-6 mx-auto font-bold text-2xl underline'>User's Form</h1>
       <form
         onSubmit={handleSubmit(updateUser)}
         className='mx-auto w-full max-w-lg'
@@ -201,7 +201,7 @@ export default function UserForm({ user, setEditing }) {
                 placeholder='Doe'
                 {...register("Lname", {
                   maxLength: { value: 21, message: "content is too long" },
-                  minLength: { value: 1, message: "content is too short" },
+                  minLength: { value: 2, message: "content is too short" },
                   required: { value: true, message: "content is required" },
                 })}
               />
@@ -358,7 +358,7 @@ export default function UserForm({ user, setEditing }) {
                     Amnat Charoen (อำนาจเจริญ)
                   </option>
                   <option value='Ang Thong'>Ang Thong (อ่างทอง)</option>
-                  <option value='Bangkok' selected='selected'>
+                  <option value='Bangkok' selected>
                     Bangkok (กรุงเทพฯ)
                   </option>
                   <option value='Buri Rum'>Buri Rum (บุรีรัมย์)</option>
