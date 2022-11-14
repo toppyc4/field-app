@@ -2,7 +2,7 @@ import { useMemo, useCallback, useRef, useEffect, useState } from "react"
 
 import DrawingMap from "./DrawingMap"
 // import GoogleMapReact from "google-map-react"
-import { GoogleMap, MarkerF } from "@react-google-maps/api"
+import { useLoadScript, GoogleMap, MarkerF } from "@react-google-maps/api"
 
 const Map = ({
   posts,
@@ -32,6 +32,12 @@ const Map = ({
     // (map) => (mapRef.current = map),
     []
   )
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries: ["places", "drawing", "geometry"],
+  })
+
+  if (!isLoaded) return <div>Loading . . . </div>
 
   // useEffect(() => {
   //   navigator.geolocation.getCurrentPosition(

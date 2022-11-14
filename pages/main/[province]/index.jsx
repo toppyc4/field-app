@@ -21,7 +21,7 @@ import {
   getFirestore,
 } from "firebase/firestore"
 
-import { useLoadScript } from "@react-google-maps/api"
+// import { useLoadScript } from "@react-google-maps/api"
 
 export default function PostsListByProvince({ posts, province }) {
   const router = useRouter()
@@ -41,12 +41,12 @@ export default function PostsListByProvince({ posts, province }) {
   }, [])
 
   // Load google map script
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["places", "drawing", "geometry"],
-  })
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  //   libraries: ["places", "drawing", "geometry"],
+  // })
 
-  if (!isLoaded) return <div>Loading . . . </div>
+  // if (!isLoaded) return <div>Loading . . . </div>
   console.log("posts", posts)
   console.log("router", router)
   return (
