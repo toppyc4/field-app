@@ -128,25 +128,23 @@ export default function Post(props) {
           <div className='flex mt-6'>
             <span className=''>
               <b>Creator: </b>
-              <Link
-                href={`/${post.username}`}
-                className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded'
-              >
-                @{post.username}
-              </Link>
+              <div className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded cursor-pointer'>
+                <Link href={`/${post.username}`}>
+                  <p>@{post.username}</p>
+                </Link>
+              </div>
             </span>
             {currentUser?.uid === post.uid && (
-              <Link
-                href={`/admin/${post.slug}`}
-                className='text-blue-600 underline ml-4'
-              >
-                <p>Edit Post</p>
+              <Link href={`/admin/${post.slug}`} className=''>
+                <div className='text-blue-600 underline ml-4 mt-8'>
+                  Edit Post
+                </div>
               </Link>
             )}
-            <span className='inline-block bg-gray-200 rounded-full ml-auto px-3 py-1 text-md font-semibold text-slate-900 mb-1'>
+            <span className='max-h-[48px] mt-7 inline-block bg-gray-200 rounded-full ml-auto px-3 py-2 text-md font-semibold text-slate-900 mb-1'>
               ☎ phone: {post.phone}
             </span>
-            <span className='inline-block bg-lime-50 rounded-full ml-4 px-3 py-1 text-md font-semibold text-slate-900 mb-1'>
+            <span className='max-h-[48px] mt-7 inline-block bg-lime-50 rounded-full ml-4 px-3 py-1 text-md font-semibold text-slate-900 mb-1'>
               💸 price: {post.price}
             </span>
           </div>

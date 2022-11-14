@@ -58,13 +58,11 @@ const ListItem = ({ post, selected, refProp }) => {
           >
             Edit
           </Link> */}
-
-        <Link
-          href={`/${post.username}/${post.slug}`}
-          className='text-blue-600 underline ml-auto mr-4 cursor-pointer'
-        >
-          View detail
-        </Link>
+        <div className='text-blue-600 underline ml-auto mr-4 cursor-pointer'>
+          <Link href={`/${post.username}/${post.slug}`} className=''>
+            View detail
+          </Link>
+        </div>
       </footer>
     </div>
     // <div className='max-w-sm rounded overflow-hidden shadow-lg'>

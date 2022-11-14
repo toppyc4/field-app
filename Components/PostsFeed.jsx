@@ -58,11 +58,11 @@ function PostItem({ post, admin }) {
             </p>
           </div>
           <div className='flex content-center items-center justify-center'>
-            <Link href={`/${post.username}`} class='flex items-center mt-2'>
-              <p className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded'>
+            <div className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded cursor-pointer'>
+              <Link href={`/${post.username}`} class='flex items-center mt-2'>
                 @ {post.username}
-              </p>
-            </Link>
+              </Link>
+            </div>
             <span className='inline-block bg-gray-200 rounded-full ml-auto p-2 text-sm font-semibold text-gray-700 mr-2 mb-2'>
               phone: {post.phone}
             </span>
