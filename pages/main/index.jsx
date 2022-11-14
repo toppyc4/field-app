@@ -8,7 +8,10 @@ import List from "../../Components/List"
 import Navbar from "../../Components/Navbar"
 
 const Home = ({ posts }) => {
-  const [coordinates, setCoordinates] = useState({})
+  const [coordinates, setCoordinates] = useState({
+    lat: 13.7563,
+    lng: 100.5018,
+  })
   const [zoomLv, setZoomLv] = useState(11)
   // const [bounds, setBounds] = useState(null)
   const [drawingMap, setDrawingMap] = useState(false)

@@ -107,7 +107,7 @@ export default function List({
         </div>
 
         {/* province-Selector, type-Selector */}
-        <div className='grid grid-cols-2 gap-1'>
+        <div className='grid-list-selector'>
           <div className='inline-block relative w-64'>
             <label className='font-medium'> province: </label>
 
@@ -248,7 +248,7 @@ export default function List({
         </div> */}
       </div>
 
-      <div className='grid grid-cols-2 h-[73vh] mt-2 overflow-auto'>
+      <div className='grid-list-items'>
         {posts?.map((post, i) => (
           <div className=' m-2 ' ref={elRefs[i]} key={i}>
             <ListItem

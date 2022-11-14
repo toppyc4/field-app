@@ -6,9 +6,25 @@
     * {
         box-sizing: border-box;
     }
-    
-    .grid {
+
+    .grid-list-selector {
         display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.25rem;
+    }
+
+    .grid-list-items {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        height: 73vh;
+        margin-top: 0.5rem;
+        overflow: auto;
+    }
+
+    .grid-postfeed {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
     }
 
     .btn, button {

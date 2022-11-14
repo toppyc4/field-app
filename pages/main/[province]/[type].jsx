@@ -25,7 +25,10 @@ import { useLoadScript } from "@react-google-maps/api"
 
 export default function PostsListByProvinceWithType({ posts, province, type }) {
   const router = useRouter()
-  const [coordinates, setCoordinates] = useState({})
+  const [coordinates, setCoordinates] = useState({
+    lat: 13.7563,
+    lng: 100.5018,
+  })
   const [zoomLv, setZoomLv] = useState(11)
   // const [bounds, setBounds] = useState(null)
   const [drawingMap, setDrawingMap] = useState(false)
