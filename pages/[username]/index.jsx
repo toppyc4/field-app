@@ -70,7 +70,7 @@ export default function UserProfilePage({ user, posts }) {
   console.log("posts", posts)
 
   return (
-    <>
+    <div>
       <nav className='sticky top-0 max-w-screen h-[8vh] bg-slate-800 px-[4vw] flex justify-btween items-center drops-shadow-lg'>
         <Link href='/main'>
           <h1 className='text-[66px] font-bold text-white justify-self-start cursor-pointer '>
@@ -78,7 +78,7 @@ export default function UserProfilePage({ user, posts }) {
           </h1>
         </Link>
       </nav>
-      <main className='p-10 h-fit flex justify-center'>
+      <main className='p-10 h-fit w-full flex justify-center'>
         <div className=' h-full flex flex-col'>
           <UserProfile
             user={user}
@@ -93,6 +93,6 @@ export default function UserProfilePage({ user, posts }) {
           <button>Edit Profile</button>
         </aside> */}
       </main>
-    </>
+    </div>
   )
 }

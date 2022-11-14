@@ -27,11 +27,11 @@ const Map = ({
     }),
     []
   )
-  const onLoad = useCallback(
-    setMap,
-    // (map) => (mapRef.current = map),
-    []
-  )
+  // const onLoad = useCallback(
+  //   setMap,
+  //   // (map) => (mapRef.current = map),
+  //   []
+  // )
   // const { isLoaded } = useLoadScript({
   //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
   //   libraries: ["places", "drawing", "geometry"],
@@ -70,7 +70,7 @@ const Map = ({
   console.log("coordinates", coordinates)
   console.log("map", map)
   console.log("posts", posts)
-
+  const center = { lat: 13.7563, lng: 100.5018 }
   return (
     <div className='w-full h-full bg-white'>
       {drawingMap ? (
@@ -89,7 +89,7 @@ const Map = ({
           center={coordinates}
           mapContainerClassName='w-full h-[92vh]'
           options={options}
-          onLoad={onLoad}
+          onLoad={(m) => setMap(m)}
         >
           {/* <MarkerClustererF>
             {(clusterer) => (
