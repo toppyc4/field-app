@@ -1,4 +1,4 @@
-// import { useLoadScript } from "@react-google-maps/api"
+import { useLoadScript } from "@react-google-maps/api"
 
 import { useState, useEffect } from "react"
 
@@ -24,12 +24,12 @@ const Home = ({ posts }) => {
   }, [])
 
   // Load google map script
-  // const { isLoaded } = useLoadScript({
-  //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  //   libraries: ["places", "drawing", "geometry"],
-  // })
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries: ["places", "drawing", "geometry"],
+  })
 
-  // if (!isLoaded) return <div>Loading . . . </div>
+  if (!isLoaded) return <div>Loading . . . </div>
   console.log("Mainposts", posts)
   return (
     <>
