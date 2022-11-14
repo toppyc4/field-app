@@ -9,11 +9,11 @@ const ListItem = ({ post, selected, refProp }) => {
   return (
     <div className='max-w-sm max-h-[70vh] overflow-hidden shadow-lg'>
       <img
-        className='max-w-sm max-h-[20vh]'
+        className='w-full max-w-sm max-h-[20vh] bg-white'
         src={post.photoUrl ? `${post.photoUrl}` : "/img/location-marker.svg"}
         alt=''
       />
-      <div className='px-6 py-4'>
+      <div className='px-6 py-2'>
         <header className='flex flex-wrap'>
           <p className='font-bold uppercase text-md max-h-20 overflow-hidden mb-2'>
             {post.title}

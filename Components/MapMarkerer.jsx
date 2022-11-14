@@ -92,9 +92,6 @@ export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {
           />
         </GoogleMap> */}
         <GoogleMapReact
-          // bootstrapURLKeys={{
-          //   key: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g",
-          // }}
           defaultCenter={miniMapCoor}
           center={miniMapCoor}
           defaultZoom={15}

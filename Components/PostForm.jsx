@@ -165,7 +165,7 @@ export default function PostForm({
   }) => {
     const batch = writeBatch(getFirestore())
     const _province = post?.address?.province
-    const _title = post?.title
+    const _slug = post?.slug
 
     // ref to post in provinces
     const provincePostRef = doc(
@@ -173,7 +173,7 @@ export default function PostForm({
       "provinces",
       _province,
       "posts",
-      _title
+      _slug
     )
 
     batch.update(postRef, {
@@ -220,19 +220,19 @@ export default function PostForm({
       .commit()
       .then(() => {
         // toast.success("batch!, updated")
+        toast.success("Post updated successfully!")
         // router.push("/main")
       })
       .catch((err) => alert("Commit Batch Error:" + err))
 
     reset({ content, published })
-    toast.success("Post updated successfully!")
     router.push(`/${post.username}`)
   }
 
   const deletePost = async () => {
     const batch = writeBatch(getFirestore())
     const _province = post?.address?.province
-    const _title = post?.title
+    const _slug = post?.slug
 
     // ref to post in provinces
     const provincePostRef = doc(
@@ -240,7 +240,7 @@ export default function PostForm({
       "provinces",
       _province,
       "posts",
-      _title
+      _slug
     )
 
     batch.delete(postRef)
@@ -274,7 +274,7 @@ export default function PostForm({
                   placeholder='420/68 . . .'
                   {...register("streetAddress1", {
                     maxLength: { value: 50, message: "content is too long" },
-                    minLength: { value: 10, message: "content is too short" },
+                    minLength: { value: 8, message: "content is too short" },
                     required: { value: false, message: "content is required" },
                   })}
                 />
@@ -322,7 +322,7 @@ export default function PostForm({
                   placeholder='Khu Khot'
                   {...register("district", {
                     maxLength: { value: 30, message: "content is too long" },
-                    minLength: { value: 3, message: "content is too short" },
+                    minLength: { value: 2, message: "content is too short" },
                     required: { value: false, message: "content is required" },
                   })}
                 />
@@ -712,7 +712,7 @@ export default function PostForm({
 
         <button
           type='submit'
-          className='bg-green-800 enabled:hover:bg-green-600 disabled:opacity-75'
+          className='text-white bg-green-800 enabled:hover:bg-green-600 disabled:opacity-75'
           disabled={!isDirty}
         >
           Save Change
@@ -739,7 +739,7 @@ export default function PostForm({
 
         <button
           type='button'
-          className='my-4 bg-red-800 enabled:hover:bg-red-600 disabled:opacity-75'
+          className=' my-4 bg-red-800 enabled:hover:bg-red-600 disabled:opacity-75'
           // disabled={true}
           onClick={toastAlert}
         >

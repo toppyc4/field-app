@@ -58,9 +58,11 @@ const Map = ({
     if (type === "Vacant Land") {
       return "/img/typed-markers/square-3-stack-3d.svg"
     } else if (type === "Real Estate") {
-      return "/img/typed-markers/building-storefront.svg"
-    } else if (type === "Property") {
       return "/img/typed-markers/home.svg"
+    } else if (type === "Property") {
+      return "/img/typed-markers/building-storefront.svg"
+    } else if (type === "Service") {
+      return "/img/typed-markers/truck.svg"
     }
   }
 
@@ -115,47 +117,6 @@ const Map = ({
           </MarkerClustererF> */}
         </GoogleMap>
       )}
-      {/* <GoogleMapReact
-      // bootstrapURLKeys={{ key: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g" }}
-      defaultCenter={coordinates}
-      center={coordinates}
-      defaultZoom={11}
-      options={""}
-      onChange={(e) => {
-        // console.log(e)
-        setCoordinates({ lat: e.center.lat, lng: e.center.lng })
-        setBounds({ ne: e.bounds.ne, sw: e.bounds.sw })
-      }}
-      onChildClick={(child) => {
-        setChildClicked(child)
-      }}
-    >
-      {posts?.map((post, i) => {
-        const markerLetter = String.fromCharCode("A".charCodeAt(0) + (i % 26))
-        console.log("post", post)
-        return (
-          <div
-            lat={Number(post.address.coordinate.lat)}
-            lng={Number(post.address.coordinate.lng)}
-            key={i}
-            className='abosolute z-1 cursor-pointer'
-          >
-            <img
-              src={`/img/alphabet-markers/marker_green${markerLetter}.png`}
-            />
-          </div>
-        )
-      })}
-      {coordinates && (
-        <div
-          lat={coordinates.lat}
-          lng={coordinates.lng}
-          className='absolute z-2'
-        >
-          // <img src='/img/plus-small.svg' />
-        </div>
-      )}
-    </GoogleMapReact> */}
     </div>
   )
 }

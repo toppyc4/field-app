@@ -66,10 +66,6 @@ export default function UserProfilePage({ user, posts }) {
     }
   }, [])
 
-  function handleSetEdit() {
-    setEditing((prevState) => !prevState)
-  }
-
   console.log("userProp", user)
   console.log("posts", posts)
 
@@ -81,18 +77,15 @@ export default function UserProfilePage({ user, posts }) {
             Field
           </h1>
         </Link>
-        {admin && (
-          <button
-            className='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-solid border-b-4 border-blue-700 hover:border-blue-500 rounded ml-auto'
-            onClick={handleSetEdit}
-          >
-            {editing ? "Hide Form" : "Update Profile"}
-          </button>
-        )}
       </nav>
       <main className='p-10 h-fit flex justify-center'>
         <section className=' h-full flex flex-col'>
-          <UserProfile user={user} />
+          <UserProfile
+            user={user}
+            admin={admin}
+            editing={editing}
+            setEditing={setEditing}
+          />
           {editing && <UserForm user={user} setEditing={setEditing} />}
           <PostsFeed posts={posts} admin={admin} />
         </section>

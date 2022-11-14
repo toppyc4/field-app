@@ -119,7 +119,13 @@ function CreateNewPost() {
     const uid = auth.currentUser.uid
     const userDoc = doc(getFirestore(), "users", uid, "posts", slug)
     // province
-    const postDoc = doc(getFirestore(), "provinces", province, "posts", title)
+    const provinceDoc = doc(
+      getFirestore(),
+      "provinces",
+      province,
+      "posts",
+      slug
+    )
 
     // Commit both docs together as a batch write.
     const batch = writeBatch(getFirestore())
@@ -148,7 +154,7 @@ function CreateNewPost() {
       updatedAt: serverTimestamp(),
     })
 
-    batch.set(postDoc, {
+    batch.set(provinceDoc, {
       title,
       slug,
       uid,
@@ -219,7 +225,7 @@ function CreateNewPost() {
           placeholder='garden in Chiang Mai'
           className='appearance-none block w-full bg-gray-200 text-2xl text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
           {...register("title", {
-            maxLength: { value: 33, message: "content is too long" },
+            maxLength: { value: 52, message: "content is too long" },
             minLength: { value: 5, message: "content is too short" },
             required: { value: true, message: "content is required" },
           })}
@@ -297,7 +303,7 @@ function CreateNewPost() {
                   placeholder='Huay Sai'
                   {...register("district", {
                     maxLength: { value: 30, message: "content is too long" },
-                    minLength: { value: 3, message: "content is too short" },
+                    minLength: { value: 2, message: "content is too short" },
                     required: { value: false, message: "content is required" },
                   })}
                 />

@@ -7,7 +7,7 @@ import {
   updateDoc,
 } from "firebase/firestore"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useRouter } from "next/router"
 import Link from "next/link"
 
@@ -16,6 +16,7 @@ import {
   useDocumentData,
 } from "react-firebase-hooks/firestore"
 
+import { UserContext } from "../../lib/context"
 import PostForm from "../../Components/PostForm"
 
 export default function AdminPostPage() {
@@ -36,6 +37,7 @@ export default function AdminPostPage() {
 
 function PostManager() {
   const [preview, setPreview] = useState(false)
+  const [admin, setAdmin] = useState(false)
 
   const router = useRouter()
   const { slug } = router.query
@@ -43,13 +45,23 @@ function PostManager() {
 
   const postRef = doc(getFirestore(), "users", uid, "posts", slug)
   const [post] = useDocumentData(postRef)
+  const { username } = useContext(UserContext)
 
   console.log("postRef:", postRef)
   console.log("post:", post)
+  console.log("admin:", admin)
+  console.log("username:", username)
+
+  useEffect(() => {
+    username === post?.username && setAdmin(true)
+    console.log("check admin")
+  }, [username, post])
 
   return (
     <main className='w-full py-10 px-[20vw]'>
-      {post && (
+      {!post && <p>404 Post not found . . . </p>}
+      {!admin && <p>You have no authorize to Edit . . . </p>}
+      {post && admin && (
         <div className='flex justify-center'>
           <section className='w-[63vh] h-full mr-[1rem]'>
             <div className='mb-4'>
