@@ -11,9 +11,10 @@ function MyApp({ Component, pageProps }) {
   //   setShowChild(true)
   // }, [])
   // Load google map script
+  const libraries = ["places", "drawing", "geometry"]
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g",
-    libraries: ["places", "drawing", "geometry"],
+    libraries: libraries,
   })
 
   if (!isLoaded) return <div>Loading . . . </div>

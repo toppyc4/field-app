@@ -7,7 +7,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete"
 
-import { useLoadScript } from "@react-google-maps/api"
+// import { useLoadScript } from "@react-google-maps/api"
 
 export default function List({
   setCoordinates,

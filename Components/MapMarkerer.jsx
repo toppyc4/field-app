@@ -5,9 +5,10 @@ import GoogleMapReact from "google-map-react"
 
 export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {
   // Load google map script
+  const libraries = ["places", "drawing", "geometry"]
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g",
-    libraries: ["places", "drawing", "geometry"],
+    libraries: libraries,
   })
 
   // const [showMap, setShowMap] = useState(false)
