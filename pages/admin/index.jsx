@@ -2,6 +2,10 @@ import { useContext, useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import Link from "next/Link"
 
+import MapMarkerer from "../../components/MapMarkerer"
+import ImageUploader from "../../components/ImageUploader"
+import AuthCheck from "../../components/AuthCheck"
+
 import { UserContext } from "../../lib/context"
 import { auth } from "../../lib/firebaseConfig"
 
@@ -16,10 +20,6 @@ import {
 import { useForm } from "react-hook-form"
 import kebabCase from "lodash.kebabcase"
 import toast from "react-hot-toast"
-import MapMarkerer from "../../components/MapMarkerer"
-import ImageUploader from "../../components/ImageUploader"
-import AuthCheck from "../../components/firebase/AuthCheck"
-import Navbar from "../../components/Navbar"
 
 export default function AdminPostPage() {
   return (

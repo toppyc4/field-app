@@ -8,6 +8,7 @@
   "dependencies": {
     "@reach/combobox": "^0.18.0",
     "@react-google-maps/api": "^2.13.1",
+    "eslint-plugin-react": "^7.31.10",
     "firebase": "^9.13.0",
     "firebase-admin": "^11.2.0",
     "google-map-react": "^2.2.0",

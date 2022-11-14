@@ -1,4 +1,4 @@
-import AuthCheck from "../../components/firebase/AuthCheck"
+import AuthCheck from "../../Components/AuthCheck"
 import { auth, db } from "../../lib/firebaseConfig"
 import {
   getFirestore,

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useContext } from "react"
-import { UserContext } from "../../lib/context"
+import { UserContext } from "../lib/context"
 
 // Component's children only shown to logged-in user
 export default function AuthCheck(props) {
