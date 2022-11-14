@@ -32,12 +32,12 @@ const Map = ({
     // (map) => (mapRef.current = map),
     []
   )
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["places", "drawing", "geometry"],
-  })
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  //   libraries: ["places", "drawing", "geometry"],
+  // })
 
-  if (!isLoaded) return <div>Loading . . . </div>
+  // if (!isLoaded) return <div>Loading . . . </div>
 
   // useEffect(() => {
   //   navigator.geolocation.getCurrentPosition(
@@ -72,7 +72,7 @@ const Map = ({
   console.log("posts", posts)
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full bg-white'>
       {drawingMap ? (
         <DrawingMap coordinates={coordinates} />
       ) : (
