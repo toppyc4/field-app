@@ -83,17 +83,18 @@ const Navbar = ({ setCoordinates, drawingMap, setDrawingMap }) => {
             href={`/${username}`}
             className='flex bg-lime-500 hover:bg-lime-400 text-white my-auto mr-3 p-1 max-h-[50px] border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded overflow-hidden'
           >
-            <img
-              src={user?.photoURL || "/img/question-mark-profile.jpg"}
-              width={50}
-              height={50}
-              className='mr-1 w-[56px] h-[56px] self-center cursor-pointer rounded-full'
-              referrerPolicy='no-referrer'
-            />
-
-            <p className='my-auto text-md self-center'>
-              {username || "unknown"}
-            </p>
+            <div>
+              <img
+                src={user?.photoURL || "/img/question-mark-profile.jpg"}
+                width={50}
+                height={50}
+                className='mr-1 w-[56px] h-[56px] self-center cursor-pointer rounded-full'
+                referrerPolicy='no-referrer'
+              />
+              {/* <p className='my-auto text-md self-center'>
+                {username || "unknown"}
+              </p> */}
+            </div>
           </Link>
           <div className='mr-3'>
             <CreatePostButton />

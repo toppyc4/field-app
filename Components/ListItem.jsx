@@ -40,11 +40,11 @@ const ListItem = ({ post, selected, refProp }) => {
         </p>
         <div className='flex'>
           <Link href={`/${post.username}`} className='flex items-center mt-2'>
-            <p className=' flex text-sm font-bold text-gray-900 leading-none'>
-              <button className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded'>
-                @ {post.username}
-              </button>
-            </p>
+            {/* <p className=' flex text-sm font-bold text-gray-900 leading-none'> */}
+            <button className='bg-lime-500 hover:bg-lime-400 text-white font-bold py-1 px-2 border-solid border-b-4 border-lime-700 hover:border-lime-500 rounded'>
+              @ {post.username}
+            </button>
+            {/* </p> */}
           </Link>
           <span className='inline-block bg-gray-200 rounded-full ml-auto p-2 text-sm font-semibold text-gray-700'>
             📞: {post.phone}
