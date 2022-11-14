@@ -9,7 +9,7 @@ visualize map and marketplace
 
 ## How to use
 
-to see Version befor deployment check the third commit of this repo, please judge me on that commit, if ever, thanks.
+To see the version before the deployment check the third commit of this repo, please judge me on that commit, if ever, thanks.
 
 ```bash
 git clone 'this repo'
