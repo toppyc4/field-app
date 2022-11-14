@@ -85,12 +85,12 @@ export default function List({
     setElRefs(refs)
   }, [posts])
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: ["places", "drawing", "geometry"],
-  })
+  // const { isLoaded } = useLoadScript({
+  //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+  //   libraries: ["places", "drawing", "geometry"],
+  // })
 
-  if (!isLoaded) return <div>Loading . . . </div>
+  // if (!isLoaded) return <div>Loading . . . </div>
 
   return (
     <div className='h-[92vh] pt-4 px-4 bg-slate-100'>

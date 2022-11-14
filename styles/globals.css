@@ -6,6 +6,11 @@
     * {
         box-sizing: border-box;
     }
+    
+    .grid {
+        display: grid;
+    }
+
     .btn, button {
         background-color: #fdfdfd;
         /* border: none; */

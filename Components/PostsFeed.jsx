@@ -70,19 +70,18 @@ function PostItem({ post, admin }) {
         </div>
         <footer className='mt-auto mb-1 px-6 pt-3 pb-2 flex'>
           {admin && (
-            <Link
-              href={`/admin/${post.slug}`}
-              className='text-blue-600 underline  cursor-pointer'
-            >
-              Edit
-            </Link>
+            <div className='text-blue-600 underline cursor-pointer'>
+              <Link
+                href={`/admin/${post.slug}`}
+                className='text-blue-600 underline  cursor-pointer'
+              >
+                Edit
+              </Link>
+            </div>
           )}
-          <Link
-            href={`/${post.username}/${post.slug}`}
-            className='text-blue-600 underline ml-auto cursor-pointer'
-          >
-            View detail
-          </Link>
+          <div className='text-blue-600 underline ml-auto cursor-pointer'>
+            <Link href={`/${post.username}/${post.slug}`}>View detail</Link>
+          </div>
         </footer>
       </div>
     </div>

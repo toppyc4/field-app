@@ -42,7 +42,7 @@ export default function PostsListByProvince({ posts, province }) {
 
   // Load google map script
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g",
     libraries: ["places", "drawing", "geometry"],
   })
 
