@@ -240,7 +240,7 @@ function CreateNewPost() {
         <div className='mt-4'>
           <div>
             <h1 className='text-xl mb-5 underline'>
-              Post's Address (ที่อยู่ของที่ดิน/สินค้า/บริการ)
+              Post Address (ที่อยู่ของที่ดิน/สินค้า/บริการ)
             </h1>
             {/* Address line 1 */}
             <div className='flex flex-wrap -mx-3 mb-2'>
