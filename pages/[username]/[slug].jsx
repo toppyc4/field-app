@@ -70,7 +70,7 @@ export default function Post(props) {
   const { user: currentUser } = useContext(UserContext)
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCI_-E-iNpc2Lp2L9cjonh2p9MX-bcp85g",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: ["places", "drawing", "geometry"],
   })
   const mapRef = useRef()

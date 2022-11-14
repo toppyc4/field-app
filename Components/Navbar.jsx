@@ -1,11 +1,11 @@
 import Link from "next/link"
+import Image from "next/image"
 import { useContext, useState } from "react"
 import { UserContext } from "../lib/context"
 import { SignOutButton } from "../pages/LoginForm"
 
-import usePlacesAutocomplete from "use-places-autocomplete"
+// import usePlacesAutocomplete from "use-places-autocomplete"
 
-import "@reach/combobox/styles.css"
 import SearchBox from "./SearchBox"
 import { useRouter } from "next/router"
 
@@ -25,13 +25,13 @@ const Navbar = ({ setCoordinates, drawingMap, setDrawingMap }) => {
   // }
   // console.log("drawingMap", drawingMap)
 
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete()
+  // const {
+  //   ready,
+  //   value,
+  //   setValue,
+  //   suggestions: { status, data },
+  //   clearSuggestions,
+  // } = usePlacesAutocomplete()
 
   const CreatePostButton = () => {
     const router = useRouter()
@@ -85,6 +85,8 @@ const Navbar = ({ setCoordinates, drawingMap, setDrawingMap }) => {
           >
             <img
               src={user?.photoURL || "/img/question-mark-profile.jpg"}
+              width={50}
+              height={50}
               className='mr-1 w-[56px] h-[56px] self-center cursor-pointer rounded-full'
               referrerPolicy='no-referrer'
             />
