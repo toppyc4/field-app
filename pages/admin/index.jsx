@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from "react"
 import { useRouter } from "next/router"
-import Link from "next/Link"
+import Link from "next/link"
 
-import MapMarkerer from "../../components/MapMarkerer"
-import ImageUploader from "../../components/ImageUploader"
-import AuthCheck from "../../components/AuthCheck"
+import MapMarkerer from "../../Components/MapMarkerer"
+import ImageUploader from "../../Components/ImageUploader"
+import AuthCheck from "../../Components/AuthCheck"
 
 import { UserContext } from "../../lib/context"
 import { auth } from "../../lib/firebaseConfig"
