@@ -1,9 +1,6 @@
 import { useRef, useEffect, useState, useMemo, useCallback } from "react"
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete"
-import { useLoadScript, GoogleMap, MarkerF } from "@react-google-maps/api"
+import { getGeocode, getLatLng } from "use-places-autocomplete"
+import { useLoadScript } from "@react-google-maps/api"
 import GoogleMapReact from "google-map-react"
 
 export default function MapMarkerer({ address, miniMapCoor, setMiniMapCoor }) {

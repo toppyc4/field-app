@@ -1,24 +1,11 @@
 import { useRouter } from "next/router"
 import ListItem from "./ListItem"
 import { useState, useEffect, useMemo, createRef } from "react"
-// import { getPostsWithProvince, db } from "../lib/firebaseConfig"
-// import { collection, getDocs } from "firebase/firestore"
 
-// import { matchSorter } from "match-sorter"
-// import debounce from "lodash.debounce"
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete"
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxOptionText,
-} from "@reach/combobox"
-import "@reach/combobox/styles.css"
 
 export default function List({
   setCoordinates,

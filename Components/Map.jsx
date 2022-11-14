@@ -1,13 +1,8 @@
 import { useMemo, useCallback, useRef, useEffect, useState } from "react"
 
 import DrawingMap from "./DrawingMap"
-import GoogleMapReact from "google-map-react"
-import {
-  GoogleMap,
-  MarkerF,
-  MarkerClustererF,
-  DrawingManager,
-} from "@react-google-maps/api"
+// import GoogleMapReact from "google-map-react"
+import { GoogleMap, MarkerF } from "@react-google-maps/api"
 
 const Map = ({
   posts,

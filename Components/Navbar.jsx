@@ -3,18 +3,8 @@ import { useContext, useState } from "react"
 import { UserContext } from "../lib/context"
 import { SignOutButton } from "../pages/LoginForm"
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete"
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-  ComboboxOptionText,
-} from "@reach/combobox"
+import usePlacesAutocomplete from "use-places-autocomplete"
+
 import "@reach/combobox/styles.css"
 import SearchBox from "./SearchBox"
 import { useRouter } from "next/router"

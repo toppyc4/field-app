@@ -12,10 +12,10 @@ import {
 } from "firebase/firestore"
 
 import { useForm } from "react-hook-form"
-import {
-  useDocumentDataOnce,
-  useDocumentData,
-} from "react-firebase-hooks/firestore"
+// import {
+//   useDocumentDataOnce,
+//   useDocumentData,
+// } from "react-firebase-hooks/firestore"
 import toast from "react-hot-toast"
 
 export default function UserForm({ user, setEditing }) {
