@@ -79,7 +79,7 @@ export default function UserProfilePage({ user, posts }) {
         </Link>
       </nav>
       <main className='p-10 h-fit flex justify-center'>
-        <section className=' h-full flex flex-col'>
+        <div className=' h-full flex flex-col'>
           <UserProfile
             user={user}
             admin={admin}
@@ -88,7 +88,7 @@ export default function UserProfilePage({ user, posts }) {
           />
           {editing && <UserForm user={user} setEditing={setEditing} />}
           <PostsFeed posts={posts} admin={admin} />
-        </section>
+        </div>
         {/* <aside className=''>
           <button>Edit Profile</button>
         </aside> */}

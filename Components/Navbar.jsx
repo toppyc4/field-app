@@ -91,7 +91,9 @@ const Navbar = ({ setCoordinates, drawingMap, setDrawingMap }) => {
               referrerPolicy='no-referrer'
             />
 
-            <p className='text-md self-center'>{username || "unknown"}</p>
+            <p className='my-auto text-md self-center'>
+              {username || "unknown"}
+            </p>
           </Link>
           <div className='mr-3'>
             <CreatePostButton />
