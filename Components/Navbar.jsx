@@ -88,7 +88,7 @@ const Navbar = ({ setCoordinates, drawingMap, setDrawingMap }) => {
                 src={user?.photoURL || "/img/question-mark-profile.jpg"}
                 width={50}
                 height={50}
-                className='mr-1 w-[56px] h-[56px] self-center cursor-pointer rounded-full'
+                className='mr-2 w-[56px] h-[56px] self-center cursor-pointer rounded-full'
                 referrerPolicy='no-referrer'
               />
               {/* <p className='my-auto text-md self-center'>
